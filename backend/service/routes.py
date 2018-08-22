@@ -23,7 +23,7 @@ def connect_to_blackfynn():
 
 @app.route('/api/', methods=['GET'])
 def home():
-    return 'Welcome to a link to the Blackfynn API. Documentation coming soon but for now check out https://github.com/Tehsurfer/flask-vue'
+    return 'Welcome to a link to the Blackfynn API. Documentation coming soon but for now check out https://github.com/Tehsurfer/Physiome-Blackfynn-API'
 
 
 @app.route('/api/dataset/<id>', methods=['GET'])
