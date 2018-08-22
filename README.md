@@ -1,6 +1,29 @@
 # Physiome-Blackfynn-API
 This api is created to link the [webGL heart model](https://github.com/Tehsurfer/MPB) to the [Blackfynn Python API](https://github.com/Blackfynn/blackfynn-python)
 
+## Documentation of Routes
+
+### Base API address: http://130.216.209.127/api
+
+### '/' (GET)
+Returns printout. Can be used for https later
+
+### '/get_timeseries_dataset_names' (POST)
+Post Data is taken in like so:
+`postData = { 
+  tokenId: 'asdfasdfasdf',
+  secret: 'dafsafdasdf'
+  }`
+Response will be a json dictionary containg the names for items containing timeseries data
+
+### '/api/get_channel_data' (GET)
+Note: must have already used '/get_timeseries_dataset_names'
+Headers needed:
+  `'Name': name of the dataset
+  'Channel': data channel in dataset requested`
+  
+Response is a json dictionary with the data for 1 second of the channel (will add more here soon)
+
 ## Backend
 
 ### Prerequisites
@@ -18,12 +41,10 @@ This api is created to link the [webGL heart model](https://github.com/Tehsurfer
 - Run `python server.py` to start the flask app
 
 ## Frontend
+-will add soon (its currently at https://github.com/Tehsurfer/MPB)
 
 ### Prerequisites
-- Node >= v8.0.0
-
-### Check if it's running 
-- Open `localhost:80` in your browser
+none
 
 ### Use the front end tester
 - Open index.html
