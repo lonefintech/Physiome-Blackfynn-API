@@ -28,7 +28,7 @@ def home():
 
 @app.route('/api/dataset/<id>', methods=['GET'])
 def dataset(id):
-    dataset = bf.get_dataset(id)2
+    dataset = bf.get_dataset(id)
     return 'Dataset: {}'.format(dataset.name)
 
 
