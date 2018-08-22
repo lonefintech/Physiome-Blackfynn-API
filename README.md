@@ -3,7 +3,7 @@ This api is created to link the [webGL heart model](https://github.com/Tehsurfer
 
 ## Documentation of Routes
 
-### Base API address: http://130.216.209.127/api
+### Base API address: http://18.191.253.82/api
 
 ### '/' (GET)
 Returns printout. Can be used for https later
