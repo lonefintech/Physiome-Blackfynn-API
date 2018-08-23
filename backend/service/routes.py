@@ -3,6 +3,7 @@ from blackfynn import Blackfynn
 
 from service.app import app
 from service.config import Config
+import json
 
 bf = None
 
@@ -38,7 +39,7 @@ def get_timeseries_dataset_names():
     data = json.loads(request.data.decode("utf-8"))
 
     global bf
-    bf = blackfynn.Blackfynn(api_token=data['tokenId'], api_secret=data['secret'])
+    bf = Blackfynn(api_token=data['tokenId'], api_secret=data['secret'])
     data_sets = bf.datasets()
 
     global time_series_items
