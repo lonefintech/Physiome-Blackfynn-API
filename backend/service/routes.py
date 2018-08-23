@@ -1,4 +1,5 @@
 from flask import jsonify
+from flask import request
 from blackfynn import Blackfynn
 
 from service.app import app
