@@ -73,27 +73,6 @@ def datasets():
         break
     return json.dumps({'data': str(channel_array.tolist())})
 
-# /api/get_channel_data: Returns the data relating to the first channel of a given
-#      dataset
-@app.route('/api/get_channel_data', methods=['GET'])
-def datasets():
-
-    name = request.headers['Name']
-    channel = request.headers['Channel']
-
-    global bf
-    global time_series_items
-    data = []
-    channel_array = []
-    for item in time_series_items:
-        print(item.name)
-        if item.name == name:
-            data = item.get_data(length='1s')
-    for key in data:
-        channel_array = data[key]
-        break
-    return json.dumps({'data': str(channel_array.tolist())})
-
 # /api/get_channels: Returns channel names for a given dataset
 @app.route('/api/get_channels', methods=['GET'])
 def channels():
