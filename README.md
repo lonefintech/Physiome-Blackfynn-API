@@ -16,7 +16,7 @@ Post Data is taken in like so:
   }`
 Response will be a json dictionary containg the names for items containing timeseries data
 
-### '/api/get_channel_data' (GET)
+### '/get_channel_data' (GET)
 Note: must have already used '/get_timeseries_dataset_names'
 Headers needed:
   `'Name': name of the dataset
@@ -24,6 +24,22 @@ Headers needed:
   
 Response is a json dictionary with the data for 1 second of the channel (will add more here soon)
 
+### '/get_channels' (GET)
+Note: must have already used '/get_timeseries_dataset_names'
+Headers needed:
+  `'Name': name of the dataset`
+  
+Response is a json dictionary of channel names
+
+### '/get_channel' (GET)
+Note: must have already used '/get_timeseries_dataset_names'
+Headers needed:
+
+  `'Name': name of the dataset
+   'Channel': name of channel `
+  
+Response is a json dictionary of channel names
+  
 ## Backend
 
 ### Prerequisites
