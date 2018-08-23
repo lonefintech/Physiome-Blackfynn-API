@@ -69,7 +69,7 @@ def datasets():
     for item in time_series_items:
         print(item.name)
         if item.name == name:
-            data = item.get_data(length='1s')
+            data = item.get_data(length='2s')
     for key in data:
         channel_array = data[key]
         break
@@ -104,7 +104,7 @@ def getChannel():
     for item in time_series_items:
         print(item.name)
         if item.name == name:
-            data = item.get_data(length='1s')
+            data = item.get_data(length='2s')
             print
     channel = channel.decode("utf-8")
     return json.dumps({'data': str(data[channel].tolist())})
