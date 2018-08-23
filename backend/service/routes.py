@@ -52,7 +52,7 @@ def get_timeseries_dataset_names():
                 time_series_items.append(item)
                 time_series_names.append(item.name)
 
-    return json.dumps({'time_series_names': time_series_names})
+    return json.dumps({'names': time_series_names})
 
 # /api/get_channel_data: Returns the data relating to the first channel of a given
 #      dataset
