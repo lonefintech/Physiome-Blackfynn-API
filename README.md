@@ -26,7 +26,7 @@ Note: must have already used '/get_timeseries_dataset_names'
 Headers needed:
 
 ```
-headers={
+headers = {
   'Name': name of the dataset
   'Channel': data channel in dataset requested
   }
@@ -39,7 +39,7 @@ Note: must have already used '/get_timeseries_dataset_names'
 Headers needed:
 
 ```
-headers={
+headers = {
   'Name': name of the dataset
   }
 ```
@@ -51,7 +51,7 @@ Note: must have already used '/get_timeseries_dataset_names'
 Headers needed:
 
 ```
-headers={
+headers = {
   'Name': name of the dataset
   }
 ```
