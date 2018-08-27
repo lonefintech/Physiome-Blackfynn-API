@@ -93,7 +93,7 @@ def channels():
 
 # /api/get_channel: Returns data for a single channel
 @app.route('/api/get_channel', methods=['GET'])
-name = request.headers['Name']
+    name = request.headers['Name']
     requested_channel = request.headers['Channel']
     requested_channel = requested_channel.decode("utf-8")
     print('request is:' + requested_channel)
