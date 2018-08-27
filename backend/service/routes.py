@@ -93,18 +93,19 @@ def channels():
 
 # /api/get_channel: Returns data for a single channel
 @app.route('/api/get_channel', methods=['GET'])
-def getChannel():
-    name = request.headers['Name']
-    channel = request.headers['Channel']
-    print('request is:' + channel)
+name = request.headers['Name']
+    requested_channel = request.headers['Channel']
+    requested_channel = requested_channel.decode("utf-8")
+    print('request is:' + requested_channel)
     global bf
     global time_series_items
     data = []
     channel_names = []
     for item in time_series_items:
-        print(item.name)
         if item.name == name:
-            data = item.get_data(length='2s')
-            print
-    channel = channel.decode("utf-8")
-    return json.dumps({'data': str(data[channel].tolist())})
+            for channel in item.channels:
+                if channel.name is requested_channel:
+                    data = channel.get_data(length='2s')
+
+    return json.dumps({'data': str(data[requested_channel].tolist())})
+
