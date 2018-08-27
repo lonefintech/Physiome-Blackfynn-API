@@ -8,8 +8,8 @@ import json
 
 bf = None
 
-# NOTE: connect_to_blackfynn() is a temporary workaround that can be used to login to Blackfynn
-#       on my account
+# NOTE: connect_to_blackfynn() is a temporary workaround that can be used to login to Blackfynn without
+# having to make a POST request
 
 # @app.before_first_request
 def connect_to_blackfynn():
@@ -25,8 +25,8 @@ def connect_to_blackfynn():
 
 @app.route('/api/', methods=['GET'])
 def home():
-    return 'Welcome to a link to the Blackfynn API. Documentation coming soon but for now check out https://github.com/Tehsurfer/Physiome-Blackfynn-API'
-
+    return ('Welcome to a link to the Blackfynn API. Documentation coming soon but for now'
+            + 'check out https://github.com/Tehsurfer/Physiome-Blackfynn-API')
 
 @app.route('/api/dataset/<id>', methods=['GET'])
 def dataset(id):
