@@ -66,6 +66,7 @@ def datasets():
 
     name = request.headers['Name']
     channel = request.headers['Channel']
+    channel = channel.decode('utf-8')
 
     global bf
     global time_series_items
@@ -101,7 +102,7 @@ def channels():
 def get_channel():
     name = request.headers['Name']
     requested_channel = request.headers['Channel']
-    requested_channel = requested_channel.decode("utf-8")
+    #requested_channel = requested_channel.decode("utf-8")
     print('request is:' + requested_channel)
     global bf
     global time_series_items
@@ -109,9 +110,13 @@ def get_channel():
     channel_names = []
     for item in time_series_items:
         if item.name == name:
+            print 'found name'
             for channel in item.channels:
-                if channel.name is requested_channel:
+                print channel
+                if channel.name == requested_channel:
                     data = channel.get_data(length='2s')
+                    print 'data is: '
+                    print data
 
-    return json.dumps({'data': str(data[requested_channel].tolist())})
+    return json.dumps({'data': str(data[requested_channel.decode('utf-8')].tolist())})
 
