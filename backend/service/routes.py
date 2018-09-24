@@ -28,6 +28,11 @@ def home():
     return ('Welcome to a link to the Blackfynn API. Documentation coming soon but for now'
             + 'check out https://github.com/Tehsurfer/Physiome-Blackfynn-API')
 
+@app.route('/', methods=['GET'])
+def home2():
+    return ('Welcome to a link to the Blackfynn API. Documentation coming soon but for now'
+            + 'check out https://github.com/Tehsurfer/Physiome-Blackfynn-API')
+
 @app.route('/api/dataset/<id>', methods=['GET'])
 def dataset(id):
     dataset = bf.get_dataset(id)
