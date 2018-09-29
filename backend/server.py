@@ -1,5 +1,9 @@
 from service.app import app
-
+from OpenSSL import SSL
 
 if __name__ == '__main__':
-  app.run(ssl_context=('/etc/letsencrypt/live/blackfynnpythonlink.ml/fullchain.pem', '/etc/letsencrypt/live/blackfynnpythonlink.ml/privkey.pem') , host='0.0.0.0', port=80)
+  context = SSL.Context(SSL.TLSv1_2_METHOD)
+  context.use_privatekey_file('/etc/letsencrypt/live/blackfynnpythonlink.ml/privkey.pem')
+  context.use_certificate_chain_file('/etc/letsencrypt/live/blackfynnpythonlink.ml/fullchain.pem')
+  context.use_certificate_file('/etc/letsencrypt/live/blackfynnpythonlink.ml/cert.pem')
+  app.run(host='0.0.0.0', port=80, threaded=True, ssl_context=context)
