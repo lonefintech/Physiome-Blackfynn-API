@@ -66,7 +66,7 @@ Response is a json dictionary of channel names
 - python 2.7
 
 ### Running the Flask App
-- Create a virtual environment and activate it
+- Create a python 2.7 virtual environment and activate it: `virtualenv --python=C:\Python27\Scripts PBA_venv`
 - Either Open `Config.py` and update the environment variables below
   - BLACKFYNN_API_TOKEN = ""
   - BLACKFYNN_API_SECRET = ""
