@@ -1,6 +1,7 @@
 from flask import jsonify
 from flask import request
 from blackfynn import Blackfynn
+import urllib2
 
 from service.app import app
 from service.config import Config
@@ -119,4 +120,25 @@ def get_channel():
                     print data
 
     return json.dumps({'data': str(data[requested_channel.decode('utf-8')].tolist())})
+
+@app.route('/api/get_file', methods=['GET'])
+def get_file():
+    file_name = request.headers['FileName']
+    print('request is: ' + file_name)
+    global bf
+    try:
+        dataset = bf.get_dataset('Zinc Exports')
+        print dataset.name
+    except:
+        return 'Error: Cannot find the Zinc Exports dataset'
+    try:
+        File_DataPackage = dataset.get_items_by_name(file_name)
+        print File_DataPackage
+    except:
+        return 'Error: Cannot find the requested File'
+
+    return urllib2.urlopen(File_DataPackage[0].view[0].url).read()
+
+
+
 
