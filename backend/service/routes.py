@@ -8,6 +8,8 @@ from service.config import Config
 import json
 
 bf = None
+global user_ip
+user_ip = None
 
 # NOTE: connect_to_blackfynn() is a temporary workaround that can be used to login to Blackfynn without
 # having to make a POST request
@@ -36,6 +38,8 @@ def home2():
 
 @app.route('/api/dataset/<id>', methods=['GET'])
 def dataset(id):
+    if not ip_logged_in(request):
+        return 'Not logged in'
     dataset = bf.get_dataset(id)
     return 'Dataset: {}'.format(dataset.name)
 
@@ -58,12 +62,16 @@ def get_timeseries_dataset_names():
                 time_series_items.append(item)
                 time_series_names.append(item.name)
 
+    global user_ip
+    user_ip = request.remote_addr
     return json.dumps({'names': time_series_names})
 
 # /api/get_channel_data: Returns the data relating to the first channel of a given
 #      dataset
 @app.route('/api/get_channel_data', methods=['GET'])
 def datasets():
+    if not ip_logged_in(request):
+        return 'Not logged in'
 
     name = request.headers['Name']
     channel = request.headers['Channel']
@@ -85,6 +93,9 @@ def datasets():
 # /api/get_channels: Returns channel names for a given dataset
 @app.route('/api/get_channels', methods=['GET'])
 def channels():
+    if not ip_logged_in(request):
+        return 'Not logged in'
+
     name = request.headers['Name']
     global bf
     global time_series_items
@@ -101,6 +112,9 @@ def channels():
 # /api/get_channel: Returns data for a single channel
 @app.route('/api/get_channel', methods=['GET'])
 def get_channel():
+    if not ip_logged_in(request):
+        return 'Not logged in'
+
     name = request.headers['Name']
     requested_channel = request.headers['Channel']
     #requested_channel = requested_channel.decode("utf-8")
@@ -121,8 +135,12 @@ def get_channel():
 
     return json.dumps({'data': str(data[requested_channel.decode('utf-8')].tolist())})
 
+# /api/get_file: Returns a file in blackfynn of a given name
 @app.route('/api/get_file', methods=['GET'])
 def get_file():
+    if not ip_logged_in(request):
+        return 'Not logged in'
+
     file_name = request.headers['FileName']
     print('request is: ' + file_name)
     global bf
@@ -138,6 +156,18 @@ def get_file():
         return 'Error: Cannot find the requested File'
 
     return urllib2.urlopen(File_DataPackage[0].view[0].url).read()
+
+@app.route("/api/get_my_ip", methods=["GET"])
+def get_my_ip():
+    return jsonify({'ip': request.remote_addr}), 200
+
+def ip_logged_in(request):
+    global user_ip
+    if user_ip is request.remote_addr:
+        return True
+    else:
+        return False
+
 
 
 
