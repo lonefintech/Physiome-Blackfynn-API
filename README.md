@@ -57,6 +57,18 @@ headers = {
 ```
   
 Response is a json dictionary of channel names
+
+### '/get_file' (GET)
+Note: must have already used '/get_timeseries_dataset_names'
+Headers needed:
+
+```
+headers = {
+  'FileName': name of the file
+  }
+```
+  
+Returns the loaded file
   
 ## Backend
 
