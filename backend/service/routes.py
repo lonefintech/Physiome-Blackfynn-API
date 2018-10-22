@@ -71,7 +71,8 @@ def get_timeseries_dataset_names():
 @app.route('/get_channel_data', methods=['GET'])
 def datasets():
     if not ip_logged_in(request):
-        return 'Not logged in'
+        pass
+        #return 'Not logged in'
 
     name = request.headers['Name']
     channel = request.headers['Channel']
@@ -94,7 +95,8 @@ def datasets():
 @app.route('/get_channels', methods=['GET'])
 def channels():
     if not ip_logged_in(request):
-        return 'Not logged in'
+        pass
+        #return 'Not logged in'
 
     name = request.headers['Name']
     global bf
@@ -113,7 +115,8 @@ def channels():
 @app.route('/get_channel', methods=['GET'])
 def get_channel():
     if not ip_logged_in(request):
-        return 'Not logged in'
+        pass
+        #return 'Not logged in'
 
     name = request.headers['Name']
     requested_channel = request.headers['Channel']
@@ -139,7 +142,8 @@ def get_channel():
 @app.route('/get_file', methods=['GET'])
 def get_file():
     if not ip_logged_in(request):
-        return 'Not logged in'
+        pass
+        #return 'Not logged in'
 
     file_name = request.headers['FileName']
     print('request is: ' + file_name)
