@@ -36,7 +36,7 @@ def home2():
     return ('Welcome to a link to the Blackfynn API. Documentation coming soon but for now'
             + 'check out https://github.com/Tehsurfer/Physiome-Blackfynn-API')
 
-@app.route('/api/dataset/<id>', methods=['GET'])
+@app.route('/dataset/<id>', methods=['GET'])
 def dataset(id):
     if not ip_logged_in(request):
         return 'Not logged in'
@@ -45,7 +45,7 @@ def dataset(id):
 
 
 # This route logs in with a given api token and secret and returns the available 
-@app.route('/api/get_timeseries_dataset_names', methods=['POST'])
+@app.route('/get_timeseries_dataset_names', methods=['POST'])
 def get_timeseries_dataset_names():
     data = json.loads(request.data.decode("utf-8"))
 
@@ -68,7 +68,7 @@ def get_timeseries_dataset_names():
 
 # /api/get_channel_data: Returns the data relating to the first channel of a given
 #      dataset
-@app.route('/api/get_channel_data', methods=['GET'])
+@app.route('/get_channel_data', methods=['GET'])
 def datasets():
     if not ip_logged_in(request):
         return 'Not logged in'
@@ -91,7 +91,7 @@ def datasets():
     return json.dumps({'data': str(channel_array.tolist())})
 
 # /api/get_channels: Returns channel names for a given dataset
-@app.route('/api/get_channels', methods=['GET'])
+@app.route('/get_channels', methods=['GET'])
 def channels():
     if not ip_logged_in(request):
         return 'Not logged in'
@@ -110,7 +110,7 @@ def channels():
     return json.dumps({'data': channel_names}) 
 
 # /api/get_channel: Returns data for a single channel
-@app.route('/api/get_channel', methods=['GET'])
+@app.route('/get_channel', methods=['GET'])
 def get_channel():
     if not ip_logged_in(request):
         return 'Not logged in'
@@ -136,7 +136,7 @@ def get_channel():
     return json.dumps({'data': str(data[requested_channel.decode('utf-8')].tolist())})
 
 # /api/get_file: Returns a file in blackfynn of a given name
-@app.route('/api/get_file', methods=['GET'])
+@app.route('/get_file', methods=['GET'])
 def get_file():
     if not ip_logged_in(request):
         return 'Not logged in'
@@ -157,7 +157,7 @@ def get_file():
 
     return urllib2.urlopen(File_DataPackage[0].view[0].url).read()
 
-@app.route("/api/get_my_ip", methods=["GET"])
+@app.route("/get_my_ip", methods=["GET"])
 def get_my_ip():
     return jsonify({'ip': request.remote_addr}), 200
 

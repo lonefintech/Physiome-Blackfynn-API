@@ -6,6 +6,6 @@ from blackfynn import Blackfynn
 from service.config import Config
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 import routes
