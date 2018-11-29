@@ -208,5 +208,3 @@ def write_opencor(filename, data):
         for key in data:
             row.append(data[key][i])
         f.writerow(row)
-
-    f.close()
