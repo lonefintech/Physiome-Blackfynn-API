@@ -7,6 +7,8 @@ from service.app import app
 from service.config import Config
 import json
 import csv
+import random
+import string
 import numpy as np
 
 bf = None
