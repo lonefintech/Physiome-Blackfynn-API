@@ -177,7 +177,7 @@ def get_my_ip():
 @app.route("/create_openCOR_URL", methods=["GET"])
 def createURL():
     baseURL = 'https://blackfynnpythonlink.ml/data/'
-    baseFilePath = '/var/www/html/data/
+    baseFilePath = '/var/www/html/data/'
     randomURL = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(6))
     write_opencor(baseFilePath+randomURL,storedData)
     return json.dumps({'url': baseURL+randomURL+'.csv'})
