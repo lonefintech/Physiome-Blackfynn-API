@@ -6,9 +6,13 @@ import urllib2
 from service.app import app
 from service.config import Config
 import json
+import csv
+import numpy as np
 
 bf = None
 global user_ip
+global data
+storedData = {}
 user_ip = None
 
 # NOTE: connect_to_blackfynn() is a temporary workaround that can be used to login to Blackfynn without
@@ -101,6 +105,8 @@ def channels():
     name = request.headers['Name']
     global bf
     global time_series_items
+    global storedData
+    storedData = {}
     data = []
     channel_names = []
     for item in time_series_items:
@@ -124,6 +130,7 @@ def get_channel():
     print('request is:' + requested_channel)
     global bf
     global time_series_items
+    global storedData
     data = []
     channel_names = []
     for item in time_series_items:
@@ -135,6 +142,8 @@ def get_channel():
                     data = channel.get_data(length='2s')
                     print 'data is: '
                     print data
+                    storedData[requested_channel.decode('utf-8')] = data[requested_channel.decode('utf-8')].tolist()
+
 
     return json.dumps({'data': str(data[requested_channel.decode('utf-8')].tolist())})
 
@@ -165,6 +174,14 @@ def get_file():
 def get_my_ip():
     return jsonify({'ip': request.remote_addr}), 200
 
+@app.route("/create_openCOR_URL", methods=["GET"])
+def createURL():
+    baseURL = 'https://blackfynnpythonlink.ml/data/'
+    baseFilePath = '/var/www/html/data/
+    randomURL = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(6))
+    write_opencor(baseFilePath+randomURL,storedData)
+    return json.dumps({'url': baseURL+randomURL+'.csv'})
+
 def ip_logged_in(request):
     global user_ip
     if user_ip is request.remote_addr:
@@ -173,6 +190,21 @@ def ip_logged_in(request):
         return False
 
 
+def write_opencor(filename, data):
+    f = csv.writer(open(filename, "w", newline=''))
+    datakeys = ['environment | time (unknown unit)']
+    for key in data:
+        # note that we assume the keys here are in integers between 1-100. The %02d is to switch numbers such as '2' to '02'
+        datakeys.append(f' values | {key} (unknown unit)')
+    f.writerow(datakeys)
+    size = len(data[next(iter(data))])
 
+    # currently time is 1->len(data)
+    time = np.linspace(0, size - 1, size)
+    for i, unused in enumerate(data[next(iter(data))]):
+        row = [time[i].tolist()]
+        for key in data:
+            row.append(data[key][i])
+        f.writerow(row)
 
-
+    f.close()
