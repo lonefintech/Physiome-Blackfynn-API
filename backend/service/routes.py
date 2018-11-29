@@ -195,7 +195,7 @@ def write_opencor(filename, data):
     datakeys = ['environment | time (unknown unit)']
     for key in data:
         # note that we assume the keys here are in integers between 1-100. The %02d is to switch numbers such as '2' to '02'
-        datakeys.append(f' values | {key} (unknown unit)')
+        datakeys.append(' values | '+ key+ ' (unknown unit)')
     f.writerow(datakeys)
     size = len(data[next(iter(data))])
 
