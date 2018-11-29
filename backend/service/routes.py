@@ -181,7 +181,7 @@ def createURL():
     baseURL = 'https://blackfynnpythonlink.ml/data/'
     baseFilePath = '/var/www/html/data/'
     randomURL = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(6))
-    write_opencor(baseFilePath+randomURL,storedData)
+    write_opencor(baseFilePath+randomURL+'.csv',storedData)
     return json.dumps({'url': baseURL+randomURL+'.csv'})
 
 def ip_logged_in(request):
