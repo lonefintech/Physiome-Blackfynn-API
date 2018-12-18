@@ -176,6 +176,7 @@ def get_file():
 def get_my_ip():
     return jsonify({'ip': request.remote_addr}), 200
 
+# /api/create_openCOR_URL: Returns url of a .csv file export
 @app.route("/create_openCOR_URL", methods=["GET"])
 def createURL():
     baseURL = 'https://blackfynnpythonlink.ml/data/'
