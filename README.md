@@ -69,6 +69,14 @@ headers = {
 ```
   
 Returns the loaded file
+
+### '/create_openCOR_URL' (GET)
+Note: must have already used '/get_timeseries_dataset_names'
+( no headers needed )
+  
+This address will export all the selected channels into a .csv file readable by opencor. 
+
+Response is the URL that can be use to access said .csv file
   
 ## Backend
 
