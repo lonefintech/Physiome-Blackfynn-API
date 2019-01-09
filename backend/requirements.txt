@@ -1,4 +1,3 @@
-blackfynn==2.4.3
 boto3==1.7.75
 botocore==1.10.75
 certifi==2018.8.13
